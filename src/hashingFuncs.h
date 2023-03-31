@@ -1,6 +1,12 @@
 #ifndef SHA256_H
 #define SHA256_H
 
+#include <iostream>
+#include <iomanip>
+#include <sstream>
+#include <openssl/evp.h>
+#include <openssl/sha.h>
+#include <openssl/md5.h>
 #include <string>
 
 using namespace std;

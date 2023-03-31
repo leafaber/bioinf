@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <iostream>
+#include "cuckooFilter.h"
 
-#include "hashingFuncs.h"
 /*
 - svaka funkcija i klasa moraju biti komentirani
 - treba naznačiti tko je napisao koji dio koda
@@ -9,16 +9,19 @@
 */
 
 int main() {
+  // Just testing some functions out
   string input = "String to hash";
   cout << sha1(input) << endl;
   cout << sha256(input) << endl;
   cout << md5(input) << endl;
+  CuckooFilter cf = CuckooFilter(3, 2, 6);
+  cf.printTable();
   return 0;
 }
 
-/**************************************************************************
- * Compiling and running the program (for now):                           *
- * g++ -o LDCF.out main.cpp hashingFuncs.cpp -lssl -lcrypto               *
- * ./LDCF.out                                                             *
- *                                   - Lea                                *
- **************************************************************************/
+/******************************************************************************
+ * Compiling and running the program (for now):                               *
+ * g++ -o LDCF.out main.cpp cuckooFilter.cpp hashingFuncs.cpp -lssl -lcrypto  *
+ * ./LDCF.out                                                                 *
+ *                                   - Lea                                    *
+ ******************************************************************************/
