@@ -10,12 +10,13 @@
 
 int main() {
   // Just testing some functions out
-  string input = "String to hash";
-  cout << sha1(input) << endl;
-  cout << sha256(input) << endl;
-  cout << md5(input) << endl;
+  string input = "String to hash2";
+ 
   CuckooFilter cf = CuckooFilter(3, 2, 6);
   cf.printTable();
+  auto [ind1, ind2] = cf.getKmereIndex(input, input.size());
+
+  cout << ind1 << ',' << ind2 << endl;
   return 0;
 }
 

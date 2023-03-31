@@ -4,11 +4,13 @@
 
 #include "cuckooFilter.h"
 
-/********************************************************************
- * Implement CF table creation (constructor)   | Author: Lea Faber  *
- * Create cuckooFilter.h file                  | Author: Lea Faber  *
- * Add printTable() functionality              | Author: Lea Faber  *
- ********************************************************************/                     
+/*********************************************************************
+ * Implement CF table creation (constructor)    | Author: Lea Faber  *
+ * Create cuckooFilter.h file                   | Author: Lea Faber  *
+ * Add printTable() functionality               | Author: Lea Faber  *
+ * Add nucleoidConverter()                      | Author: Lea Faber  *
+ * Implement getKmereIndex()                    | Author: Lea Faber  *
+ *********************************************************************/                     
 
 CuckooFilter::CuckooFilter(int n_buckets, int n_entires, int fingerprint_size){
     this->m = n_buckets;
@@ -24,7 +26,7 @@ CuckooFilter::CuckooFilter(int n_buckets, int n_entires, int fingerprint_size){
 }
 
 // insering k-meres to CF
-bool CuckooFilter::insertElem(char* fingerprint){
+bool CuckooFilter::insertElem(string fingerprint){
     return true;
 }
 
@@ -46,6 +48,38 @@ CuckooFilter::~CuckooFilter() {
         delete[] buckets[i];
     }
     delete[] buckets;
+}
+
+
+tuple<uint64_t, uint64_t> CuckooFilter::getKmereIndex(string kmere, int m){
+    // takes in a k-mere string (ex. "ACCTGAC")
+    // hashes it and calcs a bucket index for both hashes
+    string h1 = sha256(kmere);
+    string h2 = md5(kmere);
+    uint64_t idx1 = std::stoull(h1.substr(0, 16), nullptr, 16);  // extract first 8 bytes (64 bits)
+    uint64_t idx2 = std::stoull(h2.substr(0, 16), nullptr, 16);  // extract first 8 bytes (64 bits)
+    return { idx1 % m , idx2 % m };
+}
+
+// maybe wont even use this functionality
+// changes for example AG to 0011
+string nucleoidConverter(char* nucleoid){
+    switch(*nucleoid) {
+    case 'A':
+        return "00";
+        break;
+    case 'T':
+        return "01";
+        break;
+    case 'C':
+        return "10";
+        break;
+    case 'G':
+        return "11";
+        break;
+    default:
+        throw std::invalid_argument("Nucleoid can only have a value of A, T, C or G");
+    }
 }
 
 /*

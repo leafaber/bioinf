@@ -2,6 +2,7 @@
 #define CUCKOO_FILTER_H
 
 #include "hashingFuncs.h"
+#include <tuple>
 
 class CuckooFilter {
 private:
@@ -19,9 +20,10 @@ public:
     ~CuckooFilter();
 
     void printTable();
-    bool insertElem(char* fp);
-    bool searchElem(char* fp);  // To impl
-    bool removeElem(char* fp);  // to impl.
+    bool insertElem(string fp);
+    bool searchElem(string fp);  // To impl
+    bool removeElem(string fp);  // to impl.
+    tuple<uint64_t, uint64_t> getKmereIndex(string kmere, int m);
 };
 
 #endif
