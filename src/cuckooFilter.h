@@ -11,8 +11,9 @@ private:
     int b;              // # of entries in a bucket
     int level;          // level of the CF, starts from 0
     int fp_size;        // size of a original fingerprint
+    int ent_size;       // size of an entry (fp_size - level)
     string prefix;      
-    char** buckets;     // ptr to CF table (2D array)
+    string** buckets;     // ptr to CF table (2D array)
 
     // In LDCF each CF contains 2 ptrs to 2 other CFs (appending for 0 or 1)
     CuckooFilter *cf0;
@@ -23,10 +24,12 @@ public:
     ~CuckooFilter();
 
     void printTable();
-    bool insert(string fp);
-    bool search(string fp);  // To impl
-    bool remove(string fp);  // to impl.
-    tuple<uint64_t, uint64_t> getFpIndex(string fingerprint, int m);
+    bool insert(string kmere);
+    bool search(string kmere);  // To impl
+    bool remove(string kmere);  // to impl.
+    // later getFP() should be a method of LDCF, not every singular CF
+    string getFingerprint(string kmere, int fp_size);
+    tuple<uint64_t, uint64_t> getFpIndex(string fingerprint);
 };
 
 string getFingerprint(string kmere, string (*hashFunc)(string));
