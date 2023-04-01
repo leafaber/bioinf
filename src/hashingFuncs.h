@@ -11,8 +11,8 @@
 
 using namespace std;
 
-string sha1(const string& input);
-string sha256(const string& input);
-string md5(const string& input);
+string sha1(const string input);
+string sha256(const string input);
+string md5(const string input);
 
 #endif

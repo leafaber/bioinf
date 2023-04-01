@@ -21,9 +21,8 @@
  *                                                             - Lea
  */
 
-
 // 160-bit hash value
-string sha1(const string& input) {
+string sha1(const string input) {
     unsigned char hash[SHA_DIGEST_LENGTH];
     EVP_MD_CTX *mdctx = EVP_MD_CTX_new();
     const EVP_MD *md = EVP_sha1();
@@ -42,8 +41,8 @@ string sha1(const string& input) {
     return ss.str();
 }
 
-// 256-bit hash value
-string sha256(const string& input) {
+// 256-bit hash value, will be used to create a fingerprint
+string sha256(const string input) {
     unsigned char hash[SHA256_DIGEST_LENGTH];
     EVP_MD_CTX *mdctx = EVP_MD_CTX_new();
     const EVP_MD *md = EVP_sha256();
@@ -62,7 +61,8 @@ string sha256(const string& input) {
     return ss.str();
 }
 
-string md5(const string& input) {
+// 128-bit hash
+string md5(const string input) {
     unsigned char hash[MD5_DIGEST_LENGTH];
     EVP_MD_CTX *mdctx = EVP_MD_CTX_new();
     const EVP_MD *md = EVP_md5();
