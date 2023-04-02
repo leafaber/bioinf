@@ -11,7 +11,8 @@
  * Add printTable() functionality               | Author: Lea Faber  *
  * Add getFingerprint()                         | Author: Lea Faber  *
  * Implement getFpIndex()                       | Author: Lea Faber  *
- * Implement insertion of an element - insert() | Author: Lea Faber  *                       
+ * Implement insertion of an element - insert() | Author: Lea Faber  *  
+ * Implement Cuckoo search()  (lookup)          | Author: Lea Faber  *                      
  *********************************************************************/                     
 
 CuckooFilter::CuckooFilter(int n_buckets, int n_entires, int level, int fp_size, string prefix){
@@ -113,6 +114,46 @@ bool CuckooFilter::insert(string input){
     }
 
     return true;
+}
+
+
+bool CuckooFilter::search(string input){
+    string fp;
+    // if the input is already a fingerprint
+    if (input[0] == '0' || input[0] == '1'){
+        fp = input;
+    } else {
+        // input is a k-mere (raw data) -> converting to fp
+        fp = getFingerprint(input, fp_size);
+    }
+    // part of the pf stored in the entry
+    string postfix = fp.substr(level, fp_size);
+    // calculating the bucket indexes of the fp
+    auto [ind1, ind2] = getFpIndex(fp);
+    // checking the buckets for the wanted fp
+    for(int i = 0; i < b; i++){
+        // serching if the desired part of the fp is stored in any of the entries
+        if(buckets[ind1][i] == postfix){
+            // there is a possibility of the sequence existing in the set
+            return true;
+        }
+        if(buckets[ind2][i] == postfix){
+            // there is a possibility of the sequence existing in the set
+            return true;
+        }
+    }
+
+    // Propagate the search on the following CFs, if they exist
+    if (cf0 != nullptr && cf1 != nullptr){
+        // char that is the prefix extension of the cf1 or cf0 cf
+        if (fp[level] == '0'){
+            return cf0->search(fp);
+        } else {
+            return cf1->search(fp);
+        }
+    }
+    // if not found
+    return false;
 }
 
 // used for testing/displaying the contents of a CF

@@ -28,6 +28,8 @@ int main() {
   cf.insert(input);
   cf.printTable();
   cf.insert(input);
+  cout << "Find existing: " << cf.search(input) << endl;
+  cout << "Find nonexisting: " << cf.search("Ne postoji") << endl;
   // cout << cf.getFingerprint(input, md5) << endl;
   return 0;
 }
