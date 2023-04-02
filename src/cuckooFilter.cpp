@@ -3,23 +3,25 @@
  ***************************************************************************************************/
 
 #include "cuckooFilter.h"
-
+// how many victim extractions before a new CF is appended
+#define MAX_RELOCATION 5
 /*********************************************************************
  * Implement CF table creation (constructor)    | Author: Lea Faber  *
  * Create cuckooFilter.h file                   | Author: Lea Faber  *
  * Add printTable() functionality               | Author: Lea Faber  *
  * Add getFingerprint()                         | Author: Lea Faber  *
  * Implement getFpIndex()                       | Author: Lea Faber  *
+ * Implement insertion of an element - insert() | Author: Lea Faber  *                       
  *********************************************************************/                     
 
-// extract somehow the fp_length (= kmere length*2)
-CuckooFilter::CuckooFilter(int n_buckets, int n_entires, int level, int fp_size){
+CuckooFilter::CuckooFilter(int n_buckets, int n_entires, int level, int fp_size, string prefix){
     this->m = n_buckets;
     this->b = n_entires;
     this->fp_size = fp_size;    // size of a fingerprint that can be stored in a bucket entry
     this->level = level;
     this->ent_size = fp_size - level;      
-    
+    this->prefix = prefix;
+
     // creating the CF table (2D array)
     // memory allocation
     buckets = new string*[m];
@@ -32,38 +34,97 @@ CuckooFilter::CuckooFilter(int n_buckets, int n_entires, int level, int fp_size)
 }
 
 // insering k-meres to CF
-bool CuckooFilter::insert(string kmere){
-    // raw data (k-mere) to fp convertion
-   string fp = getFingerprint(kmere, fp_size);
-    auto [ind1, ind2] = getFpIndex(fp);
-    // checking if first bucket index is free
-    for(int i = 0; i < b; i++){
-        // an empty entry will be represented by "N..." string
-        if(buckets[ind1][i].substr(0, 1) == "N"){
-            // inserting just the postfix of the fp
-            buckets[ind1][i] = fp.substr(fp_size - ent_size, ent_size);
-            return true;
-        }
+bool CuckooFilter::insert(string input){
+    string fp;
+    // if the input is already a fingerprint
+    if (input[0] == '0' || input[0] == '1'){
+        fp = input;
+    } else {
+        // input is a k-mere (raw data) -> converting to fp
+        fp = getFingerprint(input, fp_size);
     }
-    // checking if second bucket index is free
-    for(int i = 0; i < b; i++){
-        if(buckets[ind2][i].substr(0, 1) == "N"){
-            buckets[ind2][i] = fp.substr(fp_size - ent_size, ent_size);
-            return true;
+    
+    // TO DO: searches the cor-responding leaf CF from the root according to its ﬁngerprint
+    
+    // if cf0 and cf1 are initiated, that means this CF is already full
+    if (cf0 != nullptr && cf1 != nullptr){
+        // char that is the prefix extension of the cf1 or cf0 cf
+        if (fp[level] == '0'){
+            cout << "cf0 not nullptr, insert to cf0" << endl;
+            cf0->insert(fp);
+            cf0->printTable();
+        } else {
+            cout << "cf1 not nullptr, insert to cf1" << endl;
+            cf1->insert(fp);
+            cf1->printTable();
         }
+        return true;
     }
-    // TO DO: remove a victim
+   
+   for (int reloc = 0; reloc < MAX_RELOCATION; reloc++){
+        // calculating the bucket indexes of the fp
+        auto [ind1, ind2] = getFpIndex(fp);
+        // checking if first bucket index is free
+        for(int i = 0; i < b; i++){
+            // an empty entry will be represented by "N..." string
+            if(buckets[ind1][i].substr(0, 1) == "N"){
+                // inserting just the postfix of the fp
+                buckets[ind1][i] = fp.substr(fp_size - ent_size, ent_size);
+                return true;
+            }
+        }
+        // checking if second bucket index is free
+        for(int i = 0; i < b; i++){
+            if(buckets[ind2][i].substr(0, 1) == "N"){
+                buckets[ind2][i] = fp.substr(fp_size - ent_size, ent_size);
+                return true;
+            }
+        }
+        // Eviction of a victim
+        srand(time(NULL));
+        // evict a random entry if no empty entry
+        int eInd = rand() % b;    // random entry index
+        string victim = buckets[ind1][eInd];
+        // putting the orign fp into the entry
+        buckets[ind1][eInd] = fp.substr(fp_size - ent_size, ent_size);
+        // recover it to the original fp length of the victim
+        fp = prefix + victim;
+    }
+
+    // append the LDCF, if no empty entry was found for the final victim
+    // the while loops are here just in case
+    while (cf0 == nullptr) {
+        cf0 = new CuckooFilter(m, b, level + 1, fp_size, prefix + "0");
+    }
+    while (cf1 == nullptr) {
+        cf1 = new CuckooFilter(m, b, level + 1, fp_size, prefix + "1");
+    }
+
+    if (fp[level] == '0'){
+        cf0->printTable();
+        cout << "Create and insert to cf0" << endl;
+        cf0->insert(fp);
+        cf0->printTable();
+    } else if(fp[level] == '1'){
+        cf1->printTable();
+        cout << "Create and insert to cf1" << endl;
+        cf1->insert(fp);
+        cf1->printTable();
+    }
+
     return true;
 }
 
 // used for testing/displaying the contents of a CF
 void CuckooFilter::printTable() {
+    cout << "Table (prefix) " + prefix << endl;
     for (int i = 0; i < m; i++) {
         for (int j = 0; j < b; j++) {
             cout << "Bucket " << i << ", Entry " << j << ": ";
-            std::cout << buckets[i][j] << endl;
+            cout << buckets[i][j] << endl;
         }
     }
+    cout << endl;
 }
 
 CuckooFilter::~CuckooFilter() {
@@ -71,6 +132,9 @@ CuckooFilter::~CuckooFilter() {
         delete[] buckets[i];
     }
     delete[] buckets;
+
+    delete cf0;
+    delete cf1;
 }
 
 tuple<uint64_t, uint64_t> CuckooFilter::getFpIndex(string fingerprint){

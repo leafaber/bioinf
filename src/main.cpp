@@ -16,7 +16,8 @@ int main() {
   cout << sha256(input) << endl;
   cout << md5(input) << endl;
   */
-  CuckooFilter cf = CuckooFilter(3, 2, 0, 10);
+ // first prefix is "", because the root doesnt have a prefix
+  CuckooFilter cf = CuckooFilter(3, 1, 0, 10, "");
   cf.printTable();
   cf.insert(input);
   cf.printTable();
@@ -24,6 +25,9 @@ int main() {
   cf.printTable();
   cf.insert(input);
   cf.printTable();
+  cf.insert(input);
+  cf.printTable();
+  cf.insert(input);
   // cout << cf.getFingerprint(input, md5) << endl;
   return 0;
 }
