@@ -38,9 +38,18 @@ datoteke
 http://genome.ucsc.edu/FAQ/FAQformat.html#format5)
 
 Pročitati više u docs/"Upute za izradu projekta na predmetu Bioinformatika 1, 2022./2023.pdf"
+
 ## Upute za instalaciju i izvođenje
-Inicijalno pokretanje na Linuxu:
+Potrebna je instalacija OpenSSL (više o OpenSSL-u: https://www.openssl.org).
+
+```txt
+sudo apt-get install openssl
+sudo apt-get install libssl-dev
+```
+
+Pokretanje na Linuxu (terminal):
 - Putem terminala doći u `src` datoteku
-- pokrenuti `gcc main.cpp -lstdc++` naredbu
-
-
+- Kompajlirati pokretanjem `g++ -o LDCF.out main.cpp cuckooFilter.cpp hashingFuncs.cpp LDCF.cpp -lssl -lcrypto` naredbe
+- Pokrenuti `./LDCF.out [buckets] [entries] [fingerprint_size]`
+        - "buckets", "entries" i "fingerprint_size" su traženi argumenti tipa 'int'
+        - Npr. `./LDCF.out 3 1 10`

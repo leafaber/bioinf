@@ -1,44 +1,61 @@
 
-#include "LCDF.h"
+#include "LDCF.h"
 
-/*
-- svaka funkcija i klasa moraju biti komentirani
-- treba naznačiti tko je napisao koji dio koda
-- imena varijabli i komentari su na engleskom
+/********************************************************************
+ * Argument parsing and LDCF initialization    | Author: Lea Faber  *
+ ********************************************************************/                     
+
+/* Initialization ot the LDCF:
+
+Requires the # of buckets, # of entries and the size of the fingerprint 
+By canging the fingerprint size, the change in false positive results can be easily seen:
+                                          - Lea
 */
 
-int main() {
+int main(int argc, char* argv[]) {
+  // default lcdf
+  int buckets, entries, fp_size;
+  try{
+    if (argc != 4) {
+      throw invalid_argument("The program requires 3 additional integer args.");
+    }
+    buckets = stoi(argv[1]);
+    entries = stoi(argv[2]);
+    fp_size = stoi(argv[3]);
+  } catch(exception& e){
+    cerr << "Error: " << e.what() << endl;
+  }
+
+  // Example: LCDF lcdf = LCDF(3, 1, 10);
+  LDCF lcdf = LDCF(buckets, entries, fp_size);
+  
   // Just testing some functions out
   string input = "String to hash";
-  /*
-  cout << sha1(input) << endl;
-  cout << sha256(input) << endl;
-  cout << md5(input) << endl;
-  */
- 
-  LCDF lcdf = LCDF(3, 1, 0, 10);
-  lcdf.printLCDF();
+  lcdf.printLDCF();
   lcdf.insert(input);
-  lcdf.printLCDF();
+  lcdf.printLDCF();
   lcdf.insert(input);
-  lcdf.printLCDF();
+  lcdf.printLDCF();
   lcdf.insert(input);
-  lcdf.printLCDF();
+  lcdf.printLDCF();
   lcdf.insert(input);
-  lcdf.printLCDF();
+  lcdf.printLDCF();
   lcdf.insert(input);
   
   cout << "Find existing: " << lcdf.search(input) << endl;
   cout << "Find nonexisting: " << lcdf.search("Ne postoji") << endl;
   cout << "Remove existing: " << lcdf.remove(input) << endl;
-  lcdf.printLCDF();
-  // cout << cf.getFingerprint(input, md5) << endl;
+  lcdf.printLDCF();
   return 0;
 }
 
-/***************************************************************************************
- * Compiling and running the program (for now):                                        *
- * g++ -o LDCF.out main.cpp cuckooFilter.cpp hashingFuncs.cpp LCDF.cpp -lssl -lcrypto  *
- * ./LDCF.out                                                                          *
- *                                   - Lea                                             *
- ***************************************************************************************/
+/******************************************************************************************
+ * Compiling the program:                                                                 *
+ * g++ -o LDCF.out main.cpp cuckooFilter.cpp hashingFuncs.cpp LDCF.cpp -lssl -lcrypto     *
+ *                                                                                        *
+ * Running the program requires 3 additional arguments:                                   *
+ * ./LDCF.out [(int) buckets] [(int) entries] [(int) fp size]                             *
+ *                                                                                        *       
+ * E.g. ./LDCF.out 3 1 10                                                                 *
+ *                                                                        - Lea           *
+ ******************************************************************************************/

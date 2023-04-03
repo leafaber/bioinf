@@ -1,19 +1,19 @@
-#ifndef LCDF_H
-#define LCDF_H
+#ifndef LDCF_H
+#define LDCF_H
 
 #include "cuckooFilter.h"
-class LCDF {
+class LDCF {
     private:
         // initial cuckoo filter 
         CuckooFilter *cf;
     public:
-        LCDF(int n_buckets, int n_entries, int level, int fp_size);
-        ~LCDF();
+        LDCF(int n_buckets, int n_entries, int fp_size);
+        ~LDCF();
 
         bool insert(string input);
         bool search(string input);  
         bool remove(string input);
-        void printLCDF();
+        void printLDCF();
         // prints all cuckoo filters from this one until the end (leafs)
         void printCFs(CuckooFilter *ckf);
 };

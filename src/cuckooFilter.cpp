@@ -3,18 +3,20 @@
  ***************************************************************************************************/
 
 #include "cuckooFilter.h"
+
 // how many victim extractions before a new CF is appended
 #define MAX_RELOCATION 5
-/*********************************************************************
- * Implement CF table creation (constructor)    | Author: Lea Faber  *
- * Create cuckooFilter.h file                   | Author: Lea Faber  *
- * Add printTable() functionality               | Author: Lea Faber  *
- * Add getFingerprint()                         | Author: Lea Faber  *
- * Implement getFpIndex()                       | Author: Lea Faber  *
- * Implement insertion of an element - insert() | Author: Lea Faber  *  
- * Implement Cuckoo search()  (lookup)          | Author: Lea Faber  *   
- * Implement element removal | remove()         | Author: Lea Faber  *                   
- *********************************************************************/                     
+
+/*****************************************************************************
+ * Implement CF table creation (constructor)            | Author: Lea Faber  *
+ * Create cuckooFilter.h file                           | Author: Lea Faber  *
+ * Add printTable() functionality                       | Author: Lea Faber  *
+ * Add getFingerprint()                                 | Author: Lea Faber  *
+ * Implement getFpIndex()                               | Author: Lea Faber  *
+ * Implement insertion of an element - insert()         | Author: Lea Faber  *  
+ * Implement Cuckoo search()  (lookup)                  | Author: Lea Faber  *   
+ * Implement element removal | remove()                 | Author: Lea Faber  *                   
+ *****************************************************************************/                     
 
 CuckooFilter::CuckooFilter(int n_buckets, int n_entires, int level, int fp_size, string prefix){
     this->m = n_buckets;
