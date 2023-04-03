@@ -27,34 +27,34 @@ int main(int argc, char* argv[]) {
   }
 
   // Example: LCDF lcdf = LCDF(3, 1, 10);
-  LDCF lcdf = LDCF(buckets, entries, fp_size);
+  LDCF ldcf = LDCF(buckets, entries, fp_size);
   
   // Just testing some functions out
   string input = "String to hash";
-  lcdf.printLDCF();
+  ldcf.printLDCF();
 
-  cout << "CF count: " << lcdf.getLDCFCount() << endl;
-  cout << "CF false pos. rate: " << lcdf.getFalsePosRate() << endl;
-  lcdf.insert(input);
-  lcdf.printLDCF();
-  lcdf.insert(input);
-  lcdf.printLDCF();
-  lcdf.insert(input);
-  lcdf.printLDCF();
-  lcdf.insert(input);
+  cout << "CF count: " << ldcf.getLDCFCount() << endl;
+  cout << "CF false pos. rate: " << ldcf.getFalsePosRate() << endl;
+  ldcf.insert(input);
+  ldcf.printLDCF();
+  ldcf.insert(input);
+  ldcf.printLDCF();
+  ldcf.insert(input);
+  ldcf.printLDCF();
+  ldcf.insert(input);
 
-  cout << "CF count: " << lcdf.getLDCFCount() << endl;
-  cout << "CF false pos. rate: " << lcdf.getFalsePosRate() << endl;
-  lcdf.printLDCF();
-  lcdf.insert(input);
-  cout << "CF count: " << lcdf.getLDCFCount() << endl;
-  cout << "Find existing: " << lcdf.search(input) << endl;
-  cout << "Find nonexisting: " << lcdf.search("Ne postoji") << endl;
-  cout << "Remove existing: " << lcdf.remove(input) << endl;
-  lcdf.printLDCF();
+  cout << "CF count: " << ldcf.getLDCFCount() << endl;
+  cout << "CF false pos. rate: " << ldcf.getFalsePosRate() << endl;
+  ldcf.printLDCF();
+  ldcf.insert(input);
+  cout << "CF count: " << ldcf.getLDCFCount() << endl;
+  cout << "Find existing: " << ldcf.search(input) << endl;
+  cout << "Find nonexisting: " << ldcf.search("Ne postoji") << endl;
+  cout << "Remove existing: " << ldcf.remove(input) << endl;
+  ldcf.printLDCF();
 
-  cout << "CF count: " << lcdf.getLDCFCount() << endl;
-  cout << "CF false pos. rate: " << lcdf.getFalsePosRate() << endl;
+  cout << "CF count: " << ldcf.getLDCFCount() << endl;
+  cout << "CF false pos. rate: " << ldcf.getFalsePosRate() << endl;
   return 0;
 }
 
