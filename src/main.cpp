@@ -32,6 +32,9 @@ int main(int argc, char* argv[]) {
   // Just testing some functions out
   string input = "String to hash";
   lcdf.printLDCF();
+
+  cout << "CF count: " << lcdf.getLDCFCount() << endl;
+  cout << "CF false pos. rate: " << lcdf.getFalsePosRate() << endl;
   lcdf.insert(input);
   lcdf.printLDCF();
   lcdf.insert(input);
@@ -39,13 +42,19 @@ int main(int argc, char* argv[]) {
   lcdf.insert(input);
   lcdf.printLDCF();
   lcdf.insert(input);
+
+  cout << "CF count: " << lcdf.getLDCFCount() << endl;
+  cout << "CF false pos. rate: " << lcdf.getFalsePosRate() << endl;
   lcdf.printLDCF();
   lcdf.insert(input);
-  
+  cout << "CF count: " << lcdf.getLDCFCount() << endl;
   cout << "Find existing: " << lcdf.search(input) << endl;
   cout << "Find nonexisting: " << lcdf.search("Ne postoji") << endl;
   cout << "Remove existing: " << lcdf.remove(input) << endl;
   lcdf.printLDCF();
+
+  cout << "CF count: " << lcdf.getLDCFCount() << endl;
+  cout << "CF false pos. rate: " << lcdf.getFalsePosRate() << endl;
   return 0;
 }
 

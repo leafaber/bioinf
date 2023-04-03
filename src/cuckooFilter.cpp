@@ -18,9 +18,9 @@
  * Implement element removal | remove()                 | Author: Lea Faber  *                   
  *****************************************************************************/                     
 
-CuckooFilter::CuckooFilter(int n_buckets, int n_entires, int level, int fp_size, string prefix){
+CuckooFilter::CuckooFilter(int n_buckets, int n_entries, int level, int fp_size, string prefix){
     this->m = n_buckets;
-    this->b = n_entires;
+    this->b = n_entries;
     this->fp_size = fp_size;    // size of a fingerprint that can be stored in a bucket entry
     this->level = level;
     this->ent_size = fp_size - level;      
