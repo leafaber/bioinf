@@ -1,6 +1,5 @@
-#include <stdio.h>
-#include <iostream>
-#include "cuckooFilter.h"
+
+#include "LCDF.h"
 
 /*
 - svaka funkcija i klasa moraju biti komentirani
@@ -16,30 +15,30 @@ int main() {
   cout << sha256(input) << endl;
   cout << md5(input) << endl;
   */
- // first prefix is "", because the root doesnt have a prefix
-  CuckooFilter cf = CuckooFilter(3, 1, 0, 10, "");
-  cf.printTable();
-  cf.insert(input);
-  cf.printTable();
-  cf.insert(input);
-  cf.printTable();
-  cf.insert(input);
-  cf.printTable();
-  cf.insert(input);
-  cf.printTable();
-  cf.insert(input);
+ 
+  LCDF lcdf = LCDF(3, 1, 0, 10);
+  lcdf.printLCDF();
+  lcdf.insert(input);
+  lcdf.printLCDF();
+  lcdf.insert(input);
+  lcdf.printLCDF();
+  lcdf.insert(input);
+  lcdf.printLCDF();
+  lcdf.insert(input);
+  lcdf.printLCDF();
+  lcdf.insert(input);
   
-  cout << "Find existing: " << cf.search(input) << endl;
-  cout << "Find nonexisting: " << cf.search("Ne postoji") << endl;
-  cout << "Remove existing: " << cf.remove(input) << endl;
-  cf.printTable();
+  cout << "Find existing: " << lcdf.search(input) << endl;
+  cout << "Find nonexisting: " << lcdf.search("Ne postoji") << endl;
+  cout << "Remove existing: " << lcdf.remove(input) << endl;
+  lcdf.printLCDF();
   // cout << cf.getFingerprint(input, md5) << endl;
   return 0;
 }
 
-/******************************************************************************
- * Compiling and running the program (for now):                               *
- * g++ -o LDCF.out main.cpp cuckooFilter.cpp hashingFuncs.cpp -lssl -lcrypto  *
- * ./LDCF.out                                                                 *
- *                                   - Lea                                    *
- ******************************************************************************/
+/***************************************************************************************
+ * Compiling and running the program (for now):                                        *
+ * g++ -o LDCF.out main.cpp cuckooFilter.cpp hashingFuncs.cpp LCDF.cpp -lssl -lcrypto  *
+ * ./LDCF.out                                                                          *
+ *                                   - Lea                                             *
+ ***************************************************************************************/

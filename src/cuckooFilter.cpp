@@ -54,11 +54,11 @@ bool CuckooFilter::insert(string input){
         if (fp[level] == '0'){
             cout << "cf0 not nullptr, insert to cf0" << endl;
             cf0->insert(fp);
-            cf0->printTable();
+            //cf0->printTable();
         } else {
             cout << "cf1 not nullptr, insert to cf1" << endl;
             cf1->insert(fp);
-            cf1->printTable();
+            //cf1->printTable();
         }
         return true;
     }
@@ -103,15 +103,15 @@ bool CuckooFilter::insert(string input){
     }
 
     if (fp[level] == '0'){
-        cf0->printTable();
+        //cf0->printTable();
         cout << "Create and insert to cf0" << endl;
         cf0->insert(fp);
-        cf0->printTable();
+        //cf0->printTable();
     } else if(fp[level] == '1'){
-        cf1->printTable();
+        //cf1->printTable();
         cout << "Create and insert to cf1" << endl;
         cf1->insert(fp);
-        cf1->printTable();
+        //cf1->printTable();
     }
     return true;
 }

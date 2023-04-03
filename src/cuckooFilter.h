@@ -15,20 +15,20 @@ private:
     string prefix;      // string of size level
     string** buckets;     // ptr to CF table (2D array)
 
+public:
     // In LDCF each CF contains 2 ptrs to 2 other CFs (appending for 0 or 1)
     CuckooFilter *cf0;
     CuckooFilter *cf1;
 
-public:
     CuckooFilter(int n_buckets, int n_entries, int level, int fp_size, string prefix);
     ~CuckooFilter();
 
     void printTable();
     bool insert(string input);
-    bool search(string input);  // To impl
-    bool remove(string input);  // to impl.
-    // later getFP() should be a method of LDCF, not every singular CF
+    bool search(string input); 
+    bool remove(string input);  
     string getFingerprint(string kmere, int fp_size);
+    // get bucket index 
     tuple<uint64_t, uint64_t> getFpIndex(string fingerprint);
 };
 

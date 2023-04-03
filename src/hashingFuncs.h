@@ -1,6 +1,6 @@
 #ifndef SHA256_H
 #define SHA256_H
-
+#include <stdio.h>
 #include <iostream>
 #include <iomanip>
 #include <sstream>
