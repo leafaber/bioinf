@@ -20,6 +20,9 @@ LDCF::~LDCF() {
 }
 
 bool LDCF::insert(string input){
+    if (cf->search(input)){
+        return false;
+    }
     return cf->insert(input);
 }
 

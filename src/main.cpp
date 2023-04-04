@@ -39,14 +39,16 @@ int main(int argc, char* argv[]) {
   ldcf.printLDCF();
   ldcf.insert(input);
   ldcf.printLDCF();
-  ldcf.insert(input);
+  ldcf.insert("String to hash2");
   ldcf.printLDCF();
-  ldcf.insert(input);
+  ldcf.insert("String to hash3");
 
   cout << "CF count: " << ldcf.getLDCFCount() << endl;
   cout << "CF false pos. rate: " << ldcf.getFalsePosRate() << endl;
   ldcf.printLDCF();
-  ldcf.insert(input);
+  ldcf.insert("String to hash4");
+  ldcf.printLDCF();
+
   cout << "CF count: " << ldcf.getLDCFCount() << endl;
   cout << "Find existing: " << ldcf.search(input) << endl;
   cout << "Find nonexisting: " << ldcf.search("Ne postoji") << endl;
@@ -65,6 +67,6 @@ int main(int argc, char* argv[]) {
  * Running the program requires 3 additional arguments:                                   *
  * ./LDCF.out [(int) buckets] [(int) entries] [(int) fp size]                             *
  *                                                                                        *       
- * E.g. ./LDCF.out 3 1 10                                                                 *
+ * E.g. ./LDCF.out 3 1 30                                                                 *
  *                                                                        - Lea           *
  ******************************************************************************************/

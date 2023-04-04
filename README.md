@@ -52,4 +52,4 @@ Pokretanje na Linuxu (terminal):
 - Kompajlirati pokretanjem `g++ -o LDCF.out main.cpp cuckooFilter.cpp hashingFuncs.cpp LDCF.cpp -lssl -lcrypto` naredbe
 - Pokrenuti `./LDCF.out [buckets] [entries] [fingerprint_size]`
         - "buckets", "entries" i "fingerprint_size" su traženi argumenti tipa 'int'
-        - Npr. `./LDCF.out 3 1 10`
+        - Npr. `./LDCF.out 3 1 30`
