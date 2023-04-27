@@ -12,16 +12,21 @@ By canging the fingerprint size, the change in false positive results can be eas
                                           - Lea
 */
 
+
 int main(int argc, char* argv[]) {
   // default lcdf
-  int buckets, entries, fp_size;
+  int buckets, entries, fp_size, k;
+  string genome;
+
   try{
-    if (argc != 4) {
-      throw invalid_argument("The program requires 3 additional integer args.");
+    if (argc != 6) {
+      throw invalid_argument("The program requires 5 additional args.");
     }
     buckets = stoi(argv[1]);
     entries = stoi(argv[2]);
     fp_size = stoi(argv[3]);
+    k       = stoi(argv[4]);
+    genome  = argv[5];
   } catch(exception& e){
     cerr << "Error: " << e.what() << endl;
   }
@@ -29,7 +34,11 @@ int main(int argc, char* argv[]) {
   // Example: LCDF lcdf = LCDF(3, 1, 10);
   LDCF ldcf = LDCF(buckets, entries, fp_size);
   
-  // Just testing some functions out
+  int num_kmers = count_k_mers(&ldcf, genome, k);
+
+  cout << "Unique "<< k << "-mers: " << num_kmers << endl;
+  
+  /* Just testing some functions out
   string input = "String to hash";
   ldcf.printLDCF();
 
@@ -57,16 +66,17 @@ int main(int argc, char* argv[]) {
 
   cout << "CF count: " << ldcf.getLDCFCount() << endl;
   cout << "CF false pos. rate: " << ldcf.getFalsePosRate() << endl;
+  */
   return 0;
 }
 
-/******************************************************************************************
- * Compiling the program:                                                                 *
- * g++ -o LDCF.out main.cpp cuckooFilter.cpp hashingFuncs.cpp LDCF.cpp -lssl -lcrypto     *
- *                                                                                        *
- * Running the program requires 3 additional arguments:                                   *
- * ./LDCF.out [(int) buckets] [(int) entries] [(int) fp size]                             *
- *                                                                                        *       
- * E.g. ./LDCF.out 3 1 30                                                                 *
- *                                                                        - Lea           *
- ******************************************************************************************/
+/******************************************************************************************************
+ * Compiling the program:                                                                             *
+ * g++ -o LDCF.out main.cpp cuckooFilter.cpp hashingFuncs.cpp LDCF.cpp countKmers.cpp -lssl -lcrypto  *
+ *                                                                                                    *
+ * Running the program requires 5 additional arguments:                                               *
+ * ./LDCF.out [(int) buckets] [(int) entries] [(int) fp size] [(int) k-mere size] [(string) .fna src] *
+ *                                                                                                    *       
+ * E.g. ./LDCF.out 10 4 30 50 ./EColi_FASTA_genom.fna                                                                            *
+ *                                                                        - Lea                       *
+ ******************************************************************************************************/

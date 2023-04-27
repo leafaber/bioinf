@@ -61,26 +61,3 @@ int count_k_mers(LDCF* ldcf, string genome, int k){
     return unique_kmers;
 }
 
-
-
-int main(int argc, char* argv[]){
-    int buckets, entries, fp_size, k;
-    string genome;
-    try{
-        if (argc != 6) {
-            throw invalid_argument("The program requires 5 additional args.");
-        }
-        buckets = stoi(argv[1]);
-        entries = stoi(argv[2]);
-        fp_size = stoi(argv[3]);
-        k       = stoi(argv[4]);
-        genome  = argv[5];
-    } catch(exception& e){
-        cerr << "Error: " << e.what() << endl;
-    }
-
-    LDCF ldcf = LDCF(buckets, entries, fp_size);
-    
-    int num_kmers = count_k_mers(&ldcf, genome, k);
-    cout << "Unique "<< k << "-mers: " << num_kmers << endl;
-}

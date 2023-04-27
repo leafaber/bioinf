@@ -26,4 +26,6 @@ class LDCF {
         void printCFs(CuckooFilter *ckf);
 };
 
+int count_k_mers(LDCF* ldcf, string genome, int k);
+
 #endif
