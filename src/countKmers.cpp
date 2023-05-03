@@ -10,54 +10,45 @@
 
 #include "LDCF.h"
 using namespace std;
-
 /*********************************************************************************************************************************
 *   Read genome by k-mers and add them to ldcf if it's not already in it. Returns the number of insertions i.e. unique k-mers    *
 *   author: Luka Mucko                                                                                                           *
 /*********************************************************************************************************************************/
-int count_k_mers(LDCF* ldcf, string genome, int k){
-    ifstream file(genome);
-    if (!file.is_open()){
-        cout << "Error opening the file!" << endl;
+int count_k_mers(LDCF* ldcf, const string genome_file, int k) {
+    ifstream file(genome_file);
+    if (!file.is_open()) {
+        cerr << "Error opening the file: " << genome_file << endl;
         exit(1);
     }
-    string delim;
-    getline(file, delim);
 
+    // Read the entire genome string into memory
+    file.seekg(0, ios::end);
+    size_t genome_size = file.tellg();
+    char* genome = new char[genome_size + 1];
+    file.seekg(0, ios::beg);
+    file.read(genome, genome_size);
+    genome[genome_size] = '\0';
+    file.close();
+
+    // Process k-mers
     long unique_kmers = 0;
-    char kmer[k+1];
+    char kmer[k + 1];
     kmer[k] = '\0';
     auto start = chrono::high_resolution_clock::now();
 
-    char c;
-    int i;
-    while(file){
-        streampos pos = file.tellg();
-        i=0;
-        while(file.get(c) && i<k){
-            if(c!='\n' && c!='>'){
-                kmer[i]=c;
-                i++;
-            }else if (c=='>')
-            {
-                getline(file,delim);
-                pos = file.tellg();
-                i=0;
-            }            
-        }
-        if(i<k){
-            break;
-        }
-        if(!ldcf->search(string(kmer))){
-            unique_kmers+=ldcf->insert(string(kmer));
-        }
-        file.seekg(pos);
-        file.seekg(1, ios::cur);
+    const char* p = genome;
+    const char* end = genome + genome_size - k;
+    while (p <= end) {
+        copy(p, p + k, kmer);
+        unique_kmers += ldcf->insert(string(kmer));
+        ++p;
     }
 
-    auto end = chrono::high_resolution_clock::now();
-    auto time_ms = chrono::duration_cast<chrono::milliseconds>(end-start);
-    cout << "Done reading in: " << time_ms.count() << "ms\n";
+    auto end_time = chrono::high_resolution_clock::now();
+    auto elapsed_time = chrono::duration_cast<chrono::milliseconds>(end_time - start);
+    cout << "Done reading in: " << elapsed_time.count() << "ms\n";
+
+    delete[] genome;
     return unique_kmers;
 }
 
