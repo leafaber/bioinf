@@ -76,3 +76,7 @@ float LDCF::getFalsePosRate(){
     int s = getLDCFCount();
     return float((2*b*s)/pow(2, fp_size));
 }
+
+float LDCF::sizeInMB(){
+    return getLDCFCount() * (b * fp_size / 8.) / 1024. / 1024.; 
+}

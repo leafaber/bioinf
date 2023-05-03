@@ -37,7 +37,8 @@ int main(int argc, char* argv[]) {
   int num_kmers = count_k_mers(&ldcf, genome, k);
 
   cout << "Unique "<< k << "-mers: " << num_kmers << endl;
-  
+  cout << "Size of LDCF in MB: " << ldcf.sizeInMB() << " MB" << endl;
+
   /* Just testing some functions out
   string input = "String to hash";
   ldcf.printLDCF();
