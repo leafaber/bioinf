@@ -1,6 +1,6 @@
 
 #include "LDCF.h"
-
+#include <fstream>
 /*********************************************************************************
  * Argument parsing and LDCF initialization    | Authors: Lea Faber, Luka Mucko  *
  *********************************************************************************/                     
@@ -34,11 +34,14 @@ int main(int argc, char* argv[]) {
   // Example: LCDF lcdf = LCDF(3, 1, 10);
   LDCF ldcf = LDCF(buckets, entries, fp_size);
   
+
+  ofstream outfile;
+  outfile.open("results.txt", ios_base::app);
   int num_kmers = count_k_mers(&ldcf, genome, k);
+  outfile << "Unique "<< k << "-mers: " << num_kmers << endl;
+  outfile << "Size of LDCF in MB: " << ldcf.sizeInMB() << " MB" << endl;
 
-  cout << "Unique "<< k << "-mers: " << num_kmers << endl;
-  cout << "Size of LDCF in MB: " << ldcf.sizeInMB() << " MB" << endl;
-
+  outfile.close();
   /* Just testing some functions out
   string input = "String to hash";
   ldcf.printLDCF();

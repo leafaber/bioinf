@@ -46,8 +46,11 @@ int count_k_mers(LDCF* ldcf, const string genome_file, int k) {
 
     auto end_time = chrono::high_resolution_clock::now();
     auto elapsed_time = chrono::duration_cast<chrono::milliseconds>(end_time - start);
-    cout << "Done reading in: " << elapsed_time.count() << "ms\n";
-
+    ofstream outfile;
+    outfile.open("results.txt", ios::trunc);
+    outfile << "RESULTS:" <<endl;
+    outfile << "Done reading in: " << elapsed_time.count() << "ms\n";
+    outfile.close();
     delete[] genome;
     return unique_kmers;
 }
