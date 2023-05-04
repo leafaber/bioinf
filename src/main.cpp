@@ -1,9 +1,9 @@
 
 #include "LDCF.h"
 
-/********************************************************************
- * Argument parsing and LDCF initialization    | Author: Lea Faber  *
- ********************************************************************/                     
+/*********************************************************************************
+ * Argument parsing and LDCF initialization    | Authors: Lea Faber, Luka Mucko  *
+ *********************************************************************************/                     
 
 /* Initialization ot the LDCF:
 

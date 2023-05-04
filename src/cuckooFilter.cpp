@@ -25,6 +25,8 @@ CuckooFilter::CuckooFilter(int n_buckets, int n_entries, int level, int fp_size,
     this->level = level;
     this->ent_size = fp_size - level;      
     this->prefix = prefix;
+    this->cf0 = nullptr;
+    this->cf1 = nullptr;
 
     // creating the CF table (2D array)
     // memory allocation
@@ -37,7 +39,7 @@ CuckooFilter::CuckooFilter(int n_buckets, int n_entries, int level, int fp_size,
     }
 }
 
-// insering k-meres to CF
+// inserting k-meres to CF
 bool CuckooFilter::insert(string input){
     string fp;
     // if the input is already a fingerprint
@@ -59,6 +61,7 @@ bool CuckooFilter::insert(string input){
             return cf1->insert(fp);
         }
     }
+
    for (int reloc = 0; reloc < MAX_RELOCATION; reloc++){
         // calculating the bucket indexes of the fp
         auto [ind1, ind2] = getFpIndex(fp);
