@@ -14,7 +14,6 @@ By canging the fingerprint size, the change in false positive results can be eas
 
 
 int main(int argc, char* argv[]) {
-  // default lcdf
   int buckets, entries, fp_size, k;
   string genome;
 
@@ -81,6 +80,6 @@ int main(int argc, char* argv[]) {
  * Running the program requires 5 additional arguments:                                               *
  * ./LDCF.out [(int) buckets] [(int) entries] [(int) fp size] [(int) k-mere size] [(string) .fna src] *
  *                                                                                                    *       
- * E.g. ./LDCF.out 10 4 30 50 ./EColi_FASTA_genom.fna                                                                            *
+ * E.g. ./LDCF.out 10000 100 256 200 ecoli_genome.txt                                                 *
  *                                                                        - Lea                       *
  ******************************************************************************************************/

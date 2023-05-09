@@ -77,6 +77,7 @@ float LDCF::getFalsePosRate(){
     return float((2*b*s)/pow(2, fp_size));
 }
 
+//Number of CF * buckets * entries * fingerprint_size
 float LDCF::sizeInMB(){
-    return getLDCFCount() * (b * fp_size / 8.) / 1024. / 1024.; 
+    return getLDCFCount() * (m* b * fp_size / 8.) / 1024. / 1024.; 
 }
