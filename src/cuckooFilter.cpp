@@ -252,7 +252,7 @@ string CuckooFilter::getFingerprint(string kmere, int fp_size){
 
 float CuckooFilter::sizeInMB(){
     if (cf0 != nullptr && cf1 != nullptr){
-        return cf0->sizeInMB() + cf1->sizeInMB();
+        return cf0->sizeInMB() + cf1->sizeInMB() + m * b * ent_size / 8. /1024. /1024.;
     }
     return m * b * ent_size / 8. /1024. /1024.;
 }

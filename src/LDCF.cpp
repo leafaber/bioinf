@@ -80,8 +80,5 @@ float LDCF::getFalsePosRate(){
 //Number of CF * buckets * entries * fingerprint_size
 float LDCF::sizeInMB(){
     float total = cf->sizeInMB();
-    if (getLDCFCount() != 1){
-        total += (b * m * fp_size / 8.) /1024. /1024.;
-    }
     return total;
 }
