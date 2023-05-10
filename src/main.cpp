@@ -39,7 +39,7 @@ int main(int argc, char* argv[]) {
   int num_kmers = count_k_mers(&ldcf, genome, k);
   outfile << "Unique "<< k << "-mers: " << num_kmers << endl;
   outfile << "Size of LDCF in MB: " << ldcf.sizeInMB() << " MB" << endl;
-
+  outfile << "Number of CFs in LDCF: " << ldcf.getLDCFCount() << endl;
   outfile.close();
   /* Just testing some functions out
   string input = "String to hash";
