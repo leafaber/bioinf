@@ -51,5 +51,5 @@ Pokretanje na Linuxu (terminal):
 - Putem terminala doći u `src` datoteku
 - Kompajlirati pokretanjem `g++ -o LDCF.out main.cpp cuckooFilter.cpp hashingFuncs.cpp LDCF.cpp countKmers.cpp -lssl -lcrypto` naredbe
 - Pokrenuti `./LDCF.out [buckets] [entries] [fingerprint_size] [k-mere_size] [genome]`
-        - "buckets", "entries", "fingerprint_size" i "k-mere_size" su traženi argumenti tipa 'int', a "genome" je put do izvornog .fna filea je string
-        - Npr. `./LDCF.out 10 4 30 50 ./EColi_FASTA_genom.fna`
+        - "buckets", "entries", "fingerprint_size" i "k-mere_size" su traženi argumenti tipa 'int', a "genome" je put do izvornog filea je string
+        - Npr. `./LDCF.out 10000 100 256 50 ecoli_genome.txt`
