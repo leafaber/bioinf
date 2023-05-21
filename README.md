@@ -49,7 +49,7 @@ sudo apt-get install libssl-dev
 
 Pokretanje na Linuxu (terminal):
 - Putem terminala doći u `src` datoteku
-- Kompajlirati pokretanjem `g++ -o LDCF.out main.cpp cuckooFilter.cpp hashingFuncs.cpp LDCF.cpp -lssl -lcrypto` naredbe
-- Pokrenuti `./LDCF.out [buckets] [entries] [fingerprint_size]`
-        - "buckets", "entries" i "fingerprint_size" su traženi argumenti tipa 'int'
-        - Npr. `./LDCF.out 3 1 30`
+- Kompajlirati pokretanjem `g++ -o LDCF.out main.cpp cuckooFilter.cpp hashingFuncs.cpp LDCF.cpp countKmers.cpp -lssl -lcrypto` naredbe
+- Pokrenuti `./LDCF.out [buckets] [entries] [fingerprint_size] [k-mere_size] [genome]`
+        - "buckets", "entries", "fingerprint_size" i "k-mere_size" su traženi argumenti tipa 'int', a "genome" je put do izvornog filea je string
+        - Npr. `./LDCF.out 10000 100 256 50 ecoli_genome.txt`

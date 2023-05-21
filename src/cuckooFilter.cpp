@@ -25,6 +25,8 @@ CuckooFilter::CuckooFilter(int n_buckets, int n_entries, int level, int fp_size,
     this->level = level;
     this->ent_size = fp_size - level;      
     this->prefix = prefix;
+    this->cf0 = nullptr;
+    this->cf1 = nullptr;
 
     // creating the CF table (2D array)
     // memory allocation
@@ -37,7 +39,7 @@ CuckooFilter::CuckooFilter(int n_buckets, int n_entries, int level, int fp_size,
     }
 }
 
-// insering k-meres to CF
+// inserting k-meres to CF
 bool CuckooFilter::insert(string input){
     string fp;
     // if the input is already a fingerprint
@@ -47,24 +49,19 @@ bool CuckooFilter::insert(string input){
         // input is a k-mere (raw data) -> converting to fp
         fp = getFingerprint(input, fp_size);
     }
-    
-    // TO DO: searches the cor-responding leaf CF from the root according to its ﬁngerprint
-    
+
     // if cf0 and cf1 are initiated, that means this CF is already full
     if (cf0 != nullptr && cf1 != nullptr){
         // char that is the prefix extension of the cf1 or cf0 cf
         if (fp[level] == '0'){
-            cout << "cf0 not nullptr, insert to cf0" << endl;
-            cf0->insert(fp);
-            //cf0->printTable();
+            // cf0 not nullptr, insert to cf0
+            return cf0->insert(fp);
         } else {
-            cout << "cf1 not nullptr, insert to cf1" << endl;
-            cf1->insert(fp);
-            //cf1->printTable();
+            // cf1 not nullptr, insert to cf1
+            return cf1->insert(fp);
         }
-        return true;
     }
-   
+
    for (int reloc = 0; reloc < MAX_RELOCATION; reloc++){
         // calculating the bucket indexes of the fp
         auto [ind1, ind2] = getFpIndex(fp);
@@ -103,19 +100,18 @@ bool CuckooFilter::insert(string input){
     while (cf1 == nullptr) {
         cf1 = new CuckooFilter(m, b, level + 1, fp_size, prefix + "1");
     }
-
-    if (fp[level] == '0'){
-        //cf0->printTable();
-        cout << "Create and insert to cf0" << endl;
-        cf0->insert(fp);
-        //cf0->printTable();
-    } else if(fp[level] == '1'){
-        //cf1->printTable();
-        cout << "Create and insert to cf1" << endl;
-        cf1->insert(fp);
-        //cf1->printTable();
+    // if there is no more space in LDCF - no more leafs can be opened
+    if (level == fp.length() - 1){
+        return false;
     }
-    return true;
+    if (fp[level] == '0'){
+        // Create and insert to cf0
+        return cf0->insert(fp);
+    } else if(fp[level] == '1'){
+        // Create and insert to cf1 
+        return cf1->insert(fp);
+    }
+    return false;
 }
 
 
@@ -252,4 +248,11 @@ string CuckooFilter::getFingerprint(string kmere, int fp_size){
         fingerprint += bitset<8>(c).to_string();
     }
     return fingerprint.substr(0, fp_size);
+}
+
+float CuckooFilter::sizeInMB(){
+    if (cf0 != nullptr && cf1 != nullptr){
+        return cf0->sizeInMB() + cf1->sizeInMB() + m * b * ent_size / 8. /1024. /1024.;
+    }
+    return m * b * ent_size / 8. /1024. /1024.;
 }

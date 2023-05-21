@@ -28,6 +28,7 @@ public:
     bool search(string input); 
     bool remove(string input);  
     string getFingerprint(string kmere, int fp_size);
+    float sizeInMB();
     // get bucket index 
     tuple<uint64_t, uint64_t> getFpIndex(string fingerprint);
 };
