@@ -15,8 +15,6 @@ Izrada projekta u sklopu kolegija "Bioinformatika 1"
 https://www.cs.cmu.edu/~binfan/papers/login_cuckoofilter.pdf
 - Fan et al. 2014. Cuckoo Filter: Practically Better Than Bloom;
 http://www.cs.cmu.edu/%7Ebinfan/papers/conext14_cuckoofilter.pdf
-- tražiti slučajne podnizove (k-mere uz različite k, npr. k = 10, 20, 50, 100, 200) u E. coli genomu
-- napraviti vlastiti LDCF te usporediti s originalnom [implementacijom](https://github.com/CGCL-codes/LDCF)
 
 ## Upute za instalaciju i izvođenje
 Potrebna je instalacija OpenSSL (više o OpenSSL-u: https://www.openssl.org).
