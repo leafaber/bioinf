@@ -21,24 +21,6 @@ http://www.cs.cmu.edu/%7Ebinfan/papers/conext14_cuckoofilter.pdf
 Nastavnica: izv. prof. dr. sc. Mirjana Domazet-Lošo 
 E-mail: mirjana.domazet@fer.hr
 
-## Upute za izradu programa
-- implementacija: C/C++
-- svaka funkcija i klasa moraju biti komentirani
-- dobro pisan kod ne treba pretjerane komentare. Ako se implementiraju poznati algoritmi dovoljno je
-    samo navesti koji se algoritam implementira. Ako je neki komad koda nerazumljiv, onda se u
-    komentaru prije njega treba jasno objasniti što će se raditi.
-- treba naznačiti tko je napisao koji dio koda
-- imena varijabli i komentari su na engleskom
-- projekt treba raditi na linux OS - instalirati kao dual boot ili virtualni stroj npr. [VirtualBox](https://www.virtualbox.org/)
-- sve dodatne vanjske knjižnice moraju biti uključene u izvorni kod
-- instalacija i pokretanje iz naredbenoga retka
-- svi parametri se unose jedino prilikom pokretanja programa u naredbenom retku ili iz konfiguracijske
-datoteke
-- izlaz programa mora biti u datoteku, a ukoliko se radi o poravnanju koristiti [MAF format](
-http://genome.ucsc.edu/FAQ/FAQformat.html#format5)
-
-Pročitati više u docs/"Upute za izradu projekta na predmetu Bioinformatika 1, 2022./2023.pdf"
-
 ## Upute za instalaciju i izvođenje
 Potrebna je instalacija OpenSSL (više o OpenSSL-u: https://www.openssl.org).
 
