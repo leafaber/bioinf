@@ -1,0 +1,140 @@
+5
+RESULTS:
+Done reading in: 13563ms
+Unique 100-mers: 42839
+Size of LDCF in MB: 2.57635 MB
+Number of CFs in LDCF: 695
+
+10
+RESULTS:
+Done reading in: 13853ms
+Unique 100-mers: 42839
+Size of LDCF in MB: 2.58368 MB
+Number of CFs in LDCF: 697
+
+50
+RESULTS:
+Done reading in: 13648ms
+Unique 100-mers: 42839
+Size of LDCF in MB: 2.58365 MB
+Number of CFs in LDCF: 697
+
+100
+RESULTS:
+Done reading in: 13775ms
+Unique 100-mers: 42839
+Size of LDCF in MB: 2.59833 MB
+Number of CFs in LDCF: 701
+
+200
+RESULTS:
+Done reading in: 14528ms
+Unique 100-mers: 42839
+Size of LDCF in MB: 2.58362 MB
+Number of CFs in LDCF: 697
+
+
+Entry size:
+100 MAX_RELOCATION ./LDCF.out 10000 4 256 200
+RESULTS:
+Done reading in: 3737ms
+Unique 200-mers: 42839
+Size of LDCF in MB: 6.07491 MB
+Number of CFs in LDCF: 5
+
+100 ./LDCF.out 10000 4 100 200 shortgenome.txt
+RESULTS:
+Done reading in: 3624ms
+Unique 200-mers: 42839
+Size of LDCF in MB: 2.35558 MB
+Number of CFs in LDCF: 5
+
+100 ./LDCF.out 16 4 256 200 shortgenome.txt
+RESULTS:
+Done reading in: 15064ms
+Unique 200-mers: 42839
+Size of LDCF in MB: 2.84512 MB
+Number of CFs in LDCF: 1549
+
+100 MAX_RELOCATION:
+./LDCF.out 64 8 256 10 shortgenome.txt
+RESULTS:
+Done reading in: 10945ms
+Unique 10-mers: 41020
+Size of LDCF in MB: 3.05566 MB
+Number of CFs in LDCF: 203
+
+./LDCF.out 64 8 256 20 shortgenome.txt
+RESULTS:
+Done reading in: 11360ms
+Unique 20-mers: 42839
+Size of LDCF in MB: 3.1449 MB
+Number of CFs in LDCF: 209
+
+/LDCF.out 64 8 256 50 shortgenome.txt
+RESULTS:
+Done reading in: 10440ms
+Unique 50-mers: 42839
+Size of LDCF in MB: 3.14502 MB
+Number of CFs in LDCF: 209
+
+./LDCF.out 64 8 256 100 shortgenome.txt
+RESULTS:
+Done reading in: 10758ms
+Unique 100-mers: 42839
+Size of LDCF in MB: 3.11523 MB
+Number of CFs in LDCF: 207
+
+./LDCF.out 64 8 256 200 shortgenome.txt
+RESULTS:
+Done reading in: 10989ms
+Unique 200-mers: 42839
+Size of LDCF in MB: 3.14502 MB
+Number of CFs in LDCF: 209
+
+./LDCF.out 64 8 256 500 shortgenome.txt
+RESULTS:
+Done reading in: 10654ms
+Unique 500-mers: 42839
+Size of LDCF in MB: 3.11523 MB
+Number of CFs in LDCF: 207
+
+
+
+./LDCF.out 16 4 256 100 shortgenome.txt
+Done reading in: 15595ms
+Unique 100-mers: 42839
+Size of LDCF in MB: 2.83055 MB
+Number of CFs in LDCF: 1541
+
+./LDCF.out 32 5 256 100 shortgenome.txt 
+Done reading in: 13994ms
+Unique 100-mers: 42839
+Size of LDCF in MB: 2.91798 MB
+Number of CFs in LDCF: 629
+
+./LDCF.out 64 6 256 100 shortgenome.txt 
+Done reading in: 11734ms
+Unique 100-mers: 42839
+Size of LDCF in MB: 3.22742 MB
+Number of CFs in LDCF: 287
+
+./LDCF.out 128 7 256 100 shortgenome.txt 
+Done reading in: 9925ms
+Unique 100-mers: 42839
+Size of LDCF in MB: 3.25647 MB
+Number of CFs in LDCF: 123
+
+./LDCF.out 256 8 256 100 shortgenome.txt 
+RESULTS:
+Done reading in: 8276ms
+Unique 100-mers: 42839
+Size of LDCF in MB: 2.87109 MB
+Number of CFs in LDCF: 47
+
+./LDCF.out 512 9 256 100 shortgenome.txt
+RESULTS:
+Done reading in: 6602ms
+Unique 100-mers: 42839
+Size of LDCF in MB: 3.4574 MB
+Number of CFs in LDCF: 25
